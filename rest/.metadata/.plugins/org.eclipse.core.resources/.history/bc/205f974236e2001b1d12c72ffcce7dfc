@@ -1,0 +1,18 @@
+package com.syn.examples;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class PrintABCusingExecutors {
+	
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		
+		ExecutorService service = Executors.newFixedThreadPool(3);
+		
+		service.submit(()->System.out.println("A")).get();
+		service.submit(()->System.out.println("A")).get();
+		service.submit(()->System.out.println("A")).get();
+	}
+
+}

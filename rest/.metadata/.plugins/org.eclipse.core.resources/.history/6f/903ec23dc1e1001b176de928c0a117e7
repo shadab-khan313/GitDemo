@@ -1,0 +1,56 @@
+package com.rest.example.FirstRestExample.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.websocket.server.PathParam;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.rest.example.FirstRestExample.beans.Employee;
+import com.rest.example.FirstRestExample.repo.EmployeeRepo;
+
+@RestController
+public class EmployeeController {
+	
+	@Autowired
+	EmployeeRepo empRepo;
+	
+	@GetMapping("/employees")
+	public List<Employee> getAllEmployees(){
+		
+		List<Employee> empList =empRepo.findAll();
+		
+		return empList;
+	}
+	
+	@GetMapping("/employee/{id}")
+	public Employee getEmployees(@PathVariable Integer id){
+		Employee e ;
+		Optional opt = empRepo.findById(id);
+		if(opt.isPresent()) {
+			e = (Employee) opt.get();
+		}
+		else {
+			e = new Employee();
+		}
+		return e;
+	}
+	
+	@PostMapping("employee")
+	public void addEmployee(@RequestBody Employee e) {
+		
+		empRepo.save(e);
+		ResponseEntity.ok("Record Inserted Successfully");
+	}
+	
+	
+
+}

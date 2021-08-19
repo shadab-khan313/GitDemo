@@ -1,0 +1,13 @@
+package com.rest.example.FirstRestExample;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FirstRestExampleApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FirstRestExampleApplication.class, args);
+	}
+
+}

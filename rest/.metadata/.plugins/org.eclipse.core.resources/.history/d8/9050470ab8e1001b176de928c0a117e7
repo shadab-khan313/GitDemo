@@ -1,0 +1,5 @@
+package com.rest.example.FirstRestExample.beans;
+
+public class Employee {
+
+}

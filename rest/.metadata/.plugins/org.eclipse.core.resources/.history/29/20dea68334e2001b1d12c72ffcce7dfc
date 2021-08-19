@@ -1,0 +1,42 @@
+package com.syn.examples;
+
+class Pattern{
+	
+	public volatile int status =1;
+}
+
+public class InterThreadCommunication {
+	
+	Pattern p;
+	
+	
+
+}
+
+class Thread1 extends Thread{
+	Pattern p1;
+	public Thread1(Pattern p)
+	{
+		p1=p;
+		
+	}
+	
+	public void run() {
+		
+		for(int i=1;i<=10;i++) {
+			
+			while(p1.status!=1) {
+				try {
+					p1.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			p1.status=2;
+			p1.notifyAll();
+			System.out.println("A");
+		}
+	}
+}
